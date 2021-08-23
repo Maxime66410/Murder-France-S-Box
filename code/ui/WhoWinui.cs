@@ -2,7 +2,7 @@
 using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
-using ZombiePanic;
+using MurderFrance;
 
 
 public class WhoWinui : Panel

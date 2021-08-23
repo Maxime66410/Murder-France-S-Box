@@ -4,7 +4,7 @@ using Sandbox.UI;
 using Sandbox.UI.Construct;
 using System;
 using System.Threading.Tasks;
-using ZombiePanic.ui;
+using MurderFrance;
 
 [Library]
 public partial class MurderHud : HudEntity<RootPanel>
