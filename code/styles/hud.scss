@@ -53,10 +53,17 @@ vitals
 			font-size: 60px;
 		}
 		
-		&.teamzombie
+		&.teammurder
 		{
 			left : 80px;
 			color: rgb(255, 64, 64);
+			font-size: 60px;
+		}
+
+		&.teamsherif
+		{
+			left : 80px;
+			color: rgb(0, 193, 217);
 			font-size: 60px;
 		}
 	}

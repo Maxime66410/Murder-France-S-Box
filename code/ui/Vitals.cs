@@ -24,19 +24,24 @@ public class Vitals : Panel
 		Health.Text = $"{player.Health.CeilToInt()}";
 		Health.SetClass( "danger", player.Health < 40.0f );
 
-		if ( player.Tags.Has( "zombie" ) )
+		if ( player.Tags.Has( "murder" ) )
 		{
-			Team.Text = "Zombie";
-			Team.SetClass( "teamzombie", true );
+			Team.Text = "Tueur";
+			Team.SetClass( "teammurder", true );
+			Team.SetClass( "teamsherif", false );
+			Team.SetClass( "team", false );
 			return;
 		}
 
-		if ( player.Tags.Has( "human" ) )
+		if ( player.Tags.Has( "sherif" ) )
 		{
-			Team.SetClass( "teamzombie", false );
-			Team.SetClass( "team", true );
-			Team.Text = "Human";
+			Team.SetClass( "teammurder", false );
+			Team.SetClass( "teamsherif", true );
+			Team.SetClass( "team", false );
+			Team.Text = "Inspecteur";
 		}
-
+		
+		Team.SetClass( "team", true );
+		Team.Text = "Invité";
 	}
 }
