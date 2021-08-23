@@ -8,12 +8,11 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Text;
-using ZombiePanic.ui;
 
-namespace ZombiePanic {
+namespace MurderFrance {
 
-	[Library( "zombiepanic", Title = "Zombie Panic" )]
-	public partial class DeathmatchGame : Game
+	[Library( "murderfrance", Title = "Murder France" )]
+	public partial class MurderFrance : Game
 	{
 		[Net] public bool IsGameIsLaunch { get; private set; }
 
@@ -25,17 +24,17 @@ namespace ZombiePanic {
 
 		[Net] public string WhoWin { get; set; }
 
-		public static DeathmatchGame Instance
+		public static MurderFrance Instance
 		{
-			get => Current as DeathmatchGame;
+			get => Current as MurderFrance;
 		}
 
-		public DeathmatchGame()
+		public MurderFrance()
 		{
 
 			if ( IsServer )
 			{
-				new DeathmatchHud();
+				new MurderHud();
 			}
 		}
 
@@ -76,8 +75,6 @@ namespace ZombiePanic {
 			Instance.PreparingGame = false;
 			Log.Info( Instance.IsGameIsLaunch );
 			OnStartGame();
-			Sound.FromScreen( "roundready.round" );
-
 		}
 
 
@@ -140,7 +137,7 @@ namespace ZombiePanic {
 		{
 			base.ClientJoined( cl );
 
-			var player = new DeathmatchPlayer();
+			var player = new PlayerMurder();
 			player.Respawn();
 
 			cl.Pawn = player;
@@ -196,11 +193,24 @@ namespace ZombiePanic {
 		{
 			Random rand = new Random();
 			var target = Client.All[rand.Next( Client.All.Count )];
-			target.Pawn.Tags.Add( "zombie" );
+			target.Pawn.Tags.Add( "murder" );
+			
+			Random rands = new Random();
+			var targets = Client.All[rands.Next( Client.All.Count )];
+			if ( targets.Pawn.Tags.Has( "murder" ) )
+			{
+				Random randss = new Random();
+				var targetss = Client.All[randss.Next( Client.All.Count )];
+				targets.Pawn.Tags.Add("sherif");
+			}
+			else
+			{
+				targets.Pawn.Tags.Add("sherif");
+			}
 
 			foreach ( Client clients in Client.All )
 			{
-				if ( clients.Pawn is not DeathmatchPlayer player )
+				if ( clients.Pawn is not PlayerMurder player )
 				{
 					continue;
 				}
@@ -216,14 +226,19 @@ namespace ZombiePanic {
 
 			foreach ( Client client in Client.All )
 			{
-				if ( client.Pawn is not DeathmatchPlayer player )
+				if ( client.Pawn is not PlayerMurder player )
 				{
 					continue;
 				}
 
-				if ( player.Tags.Has( "zombie" ) )
+				if ( player.Tags.Has( "murder" ) )
 				{
-					player.Tags.Remove( "Zombie" );
+					player.Tags.Remove( "murder" );
+				}
+				
+				if ( player.Tags.Has( "sherif" ) )
+				{
+					player.Tags.Remove( "sherif" );
 				}
 
 				player.Respawn();
@@ -238,7 +253,7 @@ namespace ZombiePanic {
 
 				foreach ( Client cls in Client.All )
 				{
-					if ( cls.Pawn is not DeathmatchPlayer player )
+					if ( cls.Pawn is not PlayerMurder player )
 					{
 						continue;
 					}
@@ -253,16 +268,14 @@ namespace ZombiePanic {
 				{
 					Instance.IsGameIsLaunch = false;
 					OnFinishedUpdateValues();
-					WhoWin = "Zombies Won !";
-					SoundZombieWin();
+					WhoWin = "Le Tueur a gagné !";
 				}
 
 				if ( alivePlayers >= 1 && Instance.RoundDuration == 0 )
 				{
 					Instance.IsGameIsLaunch = false;
 					OnFinishedUpdateValues();
-					WhoWin = "Humans Won !";
-					SoundHumanWin();
+					WhoWin = "Les invités ont gagné !";
 				}
 			}
 		}
@@ -294,16 +307,6 @@ namespace ZombiePanic {
 					}
 				}
 			}
-		}
-
-		public void SoundHumanWin()
-		{
-			Sound.FromScreen( "humanend.round" );
-		}
-
-		public void SoundZombieWin()
-		{
-			Sound.FromScreen( "zombieend.round" );
 		}
 
 	}

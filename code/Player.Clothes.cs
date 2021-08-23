@@ -7,7 +7,7 @@ public class ClothingEntity : ModelEntity
 
 }
 
-partial class DeathmatchPlayer
+partial class PlayerMurder
 {
 	ModelEntity pants;
 	ModelEntity jacket;

@@ -20,7 +20,7 @@ public class WhoWinui : Panel
 		var player = Local.Pawn;
 		if ( player == null ) return;
 
-		var timeofgame = DeathmatchGame.Instance;
+		var timeofgame = MurderFrance.MurderFrance.Instance;
 		if ( timeofgame == null ) return;
 
 		WhoIsWin.Text = timeofgame.WhoWin;

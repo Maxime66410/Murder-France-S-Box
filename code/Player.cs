@@ -5,10 +5,10 @@ using System.Linq;
 using System.Numerics;
 using System.Threading;
 using ZombiePanic;
-using ZombiePanic.ui;
+//using MurderFrance.ui;
 using System.Threading.Tasks;
 
-public partial class DeathmatchPlayer : Sandbox.Player
+public partial class PlayerMurder : Sandbox.Player
 {
 	TimeSince timeSinceDropped; 
 
@@ -25,17 +25,16 @@ public partial class DeathmatchPlayer : Sandbox.Player
 
 	private SpotLightEntity SpotLightZombie;
 
-	public DeathmatchPlayer()
+	public PlayerMurder()
 	{
 		Inventory = new DmInventory( this );
-		HumanWaitAction();
 	}
 
 	public override void Respawn()
 	{
 		SetModel( "models/citizen/citizen.vmdl" );
 		
-		if ( DeathmatchGame.Instance.IsGameIsLaunch  || DeathmatchGame.Instance.InialiseGameEnd)
+		if ( MurderFrance.MurderFrance.Instance.IsGameIsLaunch  || MurderFrance.MurderFrance.Instance.InialiseGameEnd)
 		{
 			if ( IsDead )
 			{
@@ -73,20 +72,7 @@ public partial class DeathmatchPlayer : Sandbox.Player
 					AlreadyGender = true;
 				}
 			}
-
-			if ( !IsZombie )
-			{
-				this.Tags.Add( "human" );
-				HumanSpawnSound();
-			}
-
-			if ( IsZombie )
-			{
-				ZombieSpawnSound();
-				this.Tags.Add( "zombie" );
-				this.Tags.Remove( "human" );
-			}
-
+			
 		}
 		else
 		{
@@ -158,7 +144,6 @@ public partial class DeathmatchPlayer : Sandbox.Player
 			//Inventory.Add( new SMG() );
 			//Inventory.Add( new Crossbow() );
 			Inventory.Add( new Knife() );
-			Inventory.Add( new Flashlight() );
 			
 			GiveAmmo( AmmoType.Pistol, 120 );
 			//GiveAmmo( AmmoType.Buckshot, 8 );
@@ -185,15 +170,6 @@ public partial class DeathmatchPlayer : Sandbox.Player
 	{
 		base.OnKilled();
 
-		if ( !IsZombie )
-		{
-			HumanDieSound();
-		}
-		else
-		{
-			ZombieDieSound();
-		}
-		
 		if ( !IsZombie )
 		{
 			Inventory.DropActive();
@@ -272,10 +248,6 @@ public partial class DeathmatchPlayer : Sandbox.Player
 				}
 			}
 			
-			if ( Input.Pressed(InputButton.Menu) )
-			{
-				ActionMenuOpen.Checkclient(cl);
-			}
 
 
 			/*if ( ActionName != "none" )
@@ -285,13 +257,7 @@ public partial class DeathmatchPlayer : Sandbox.Player
 		}
 		else
 		{
-			ActionMenuOpen.IsOpen = false;
 			
-			
-			if ( Input.Pressed( InputButton.Flashlight ) )
-			{
-				
-			}
 		}
 
 		SimulateActiveChild( cl, ActiveChild );
@@ -431,7 +397,7 @@ public partial class DeathmatchPlayer : Sandbox.Player
 			PlaySound( "zombiepain.pain" );
 		}
 
-		if ( info.Attacker is DeathmatchPlayer attacker && attacker != this )
+		if ( info.Attacker is PlayerMurder attacker && attacker != this )
 		{
 			// Note - sending this only to the attacker!
 			attacker.DidDamage( To.Single( attacker ), info.Position, info.Damage, Health.LerpInverse( 100, 0 ) );
@@ -455,75 +421,5 @@ public partial class DeathmatchPlayer : Sandbox.Player
 		//DebugOverlay.Sphere( pos, 5.0f, Color.Red, false, 50.0f );
 
 		DamageIndicator.Current?.OnHit( pos );
-	}
-
-	public void HumanSpawnSound()
-	{
-
-		if ( GenderType )
-		{
-			PlaySound( "humansmalespawn.spawn");
-		}
-		else
-		{
-			PlaySound( "humanfemalespawn.spawn");
-		}
-	}
-
-	public void ZombieSpawnSound()
-	{
-		PlaySound( "spawnzombie.spawn");
-	}
-
-	public void ZombieDieSound()
-	{
-		PlaySound( "zombiedeath.death");
-	}
-
-	public void HumanDieSound()
-	{
-		if ( GenderType )
-		{
-			PlaySound( "humanmaledeath.death");
-		}
-		else
-		{
-			PlaySound( "humanfemaledeath.death"); 
-		}
-	}
-
-	public async Task HumanWaitAction()
-	{
-		while ( true )
-		{
-			await Task.DelaySeconds( 1 );
-
-			if ( !IsZombie )
-			{
-				if ( ActionName != "none" )
-				{
-					HumanAction(ActionName);
-				}
-			}
-		}
-	}
-	
-	[ServerCmd]
-	public void HumanAction(string nameOfAction)
-	{
-		if ( GenderType )
-		{
-			//PlaySound(nameOfAction + "males.action" );
-			Sound.FromEntity( nameOfAction + "males.action", this);
-			Log.Info(nameOfAction + "males.action");
-			ActionName = "none";
-		}
-		else
-		{
-			//PlaySound(nameOfAction + "females.action" );
-			Sound.FromEntity( nameOfAction + "females.action", this );
-			Log.Info(nameOfAction + "females.action");
-			ActionName = "none";
-		}
 	}
 }

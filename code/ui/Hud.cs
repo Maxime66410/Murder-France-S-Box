@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using ZombiePanic.ui;
 
 [Library]
-public partial class DeathmatchHud : HudEntity<RootPanel>
+public partial class MurderHud : HudEntity<RootPanel>
 {
-	public DeathmatchHud()
+	public MurderHud()
 	{
 		if ( !IsClient )
 			return;
@@ -27,7 +27,6 @@ public partial class DeathmatchHud : HudEntity<RootPanel>
 
 		RootPanel.AddChild<InventoryBar>();
 		RootPanel.AddChild<PickupFeed>();
-		RootPanel.AddChild<ActionMenuOpen>();
 
 		RootPanel.AddChild<ChatBox>();
 		RootPanel.AddChild<KillFeed>();

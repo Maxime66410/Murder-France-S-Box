@@ -20,7 +20,7 @@ public class Timerui : Panel
 		var player = Local.Pawn;
 		if ( player == null ) return;
 
-		var timeofgame = DeathmatchGame.Instance;
+		var timeofgame = MurderFrance.MurderFrance.Instance;
 		if ( timeofgame == null ) return;
 
 		if ( !timeofgame.PreparingGame && !timeofgame.InialiseGameEnd && !timeofgame.IsGameIsLaunch )
