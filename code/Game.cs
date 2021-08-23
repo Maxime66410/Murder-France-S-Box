@@ -71,7 +71,7 @@ namespace MurderFrance {
 		public void StartGame()
 		{
 			Instance.IsGameIsLaunch = true;
-			Instance.RoundDuration = 600;
+			Instance.RoundDuration = 120;
 			Instance.PreparingGame = false;
 			Log.Info( Instance.IsGameIsLaunch );
 			OnStartGame();
@@ -258,7 +258,7 @@ namespace MurderFrance {
 						continue;
 					}
 
-					if ( !player.IsDead && !player.IsZombie )
+					if ( !player.IsDead && !player.IsMurder )
 					{
 						alivePlayers += 1;
 					}

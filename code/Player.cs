@@ -13,17 +13,10 @@ public partial class PlayerMurder : Sandbox.Player
 	TimeSince timeSinceDropped; 
 
 	public bool SupressPickupNotices { get; private set; }
-	[Net] public bool IsZombie { get; set; }
+	[Net] public bool IsMurder { get; set; }
+	
+	[Net] public bool IsSherif { get; set; }
 	[Net] public bool IsDead { get; set; }
-	
-	[Net] public bool AlreadyGender { get; set; }
-	
-	[Net] public bool GenderType { get; set; }
-	
-	//[Net] public int ColorBody { get; set; } No need this for the moment
-	[Net] public static string ActionName { get; set; } = "none";
-
-	private SpotLightEntity SpotLightZombie;
 
 	public PlayerMurder()
 	{
@@ -36,89 +29,28 @@ public partial class PlayerMurder : Sandbox.Player
 		
 		if ( MurderFrance.MurderFrance.Instance.IsGameIsLaunch  || MurderFrance.MurderFrance.Instance.InialiseGameEnd)
 		{
-			if ( IsDead )
-			{
-				IsZombie = true;
-				SetMaterialGroup( 1 );
-				RenderColor = Color.Green;
-				this.Tags.Remove( "human" );
-			}
 
-			if ( this.Tags.Has( "zombie" ) )
+			if ( this.Tags.Has( "murder" ) )
 			{
-				IsZombie = true;
-				SetMaterialGroup( 1 );
-				RenderColor = Color.Green;
+				IsMurder = true;
 				Inventory.DeleteContents();
 			}
-
-			if ( !AlreadyGender )
+			
+			if ( this.Tags.Has( "sherif" ) )
 			{
-				Random rnd = new Random();
-
-				var RandomSound = rnd.Next( 0, 2 );
-
-				Log.Info(RandomSound);
-				
-				if ( RandomSound == 0 )
-				{
-					GenderType = true;
-					AlreadyGender = true;
-				}
-
-				if ( RandomSound == 1 )
-				{
-					GenderType = false;
-					AlreadyGender = true;
-				}
+				IsSherif = true;
+				Inventory.DeleteContents();
 			}
 			
 		}
 		else
 		{
-			AlreadyGender = false;
-			IsZombie = false;
+			IsMurder = false;
+			IsSherif = false;
 			Inventory.DeleteContents();
 			
-			this.Tags.Add( "human" );
-			this.Tags.Remove( "zombie" );
-			
-			if ( !AlreadyGender )
-			{
-				Random rnd = new Random();
-
-				var RandomGender = rnd.Next( 0, 2 );
-
-				Log.Info(RandomGender);
-				
-				if ( RandomGender == 0 )
-				{
-					GenderType = true;
-					AlreadyGender = true;
-				}
-
-				if ( RandomGender == 1 )
-				{
-					GenderType = false;
-					AlreadyGender = true;
-				}
-			}
-
-			if ( !IsZombie )
-			{
-			/*	SetMaterialGroup( 0 );
-				
-				Random rnds = new Random();
-
-				var RandomColor = rnds.Next( 0, 2 );
-
-				if ( RandomColor == 0 )
-				{
-					
-				}*/
-				SetMaterialGroup( 1 );
-				RenderColor = Color.White;
-			}
+			this.Tags.Remove( "sherif" );
+			this.Tags.Remove( "murder" );
 		}
 
 
@@ -136,25 +68,15 @@ public partial class PlayerMurder : Sandbox.Player
 		ClearAmmo();
 
 		SupressPickupNotices = true;
+		
 
-		if ( !IsZombie )
+		if ( IsMurder )
 		{
-			Inventory.Add( new Pistol(), true );
-			//Inventory.Add( new Shotgun() );
-			//Inventory.Add( new SMG() );
-			//Inventory.Add( new Crossbow() );
-			Inventory.Add( new Knife() );
-			
-			GiveAmmo( AmmoType.Pistol, 120 );
-			//GiveAmmo( AmmoType.Buckshot, 8 );
-			//GiveAmmo( AmmoType.Crossbow, 4 );
-		}
-
-		if ( IsZombie )
-		{
-			Inventory.Add( new ZombieHand(), true );
+			Inventory.Add( new Hand(), true );
 			GiveAmmo( AmmoType.Pistol, 100 );
 		}
+		
+		
 
 		SupressPickupNotices = false;
 		
@@ -170,10 +92,9 @@ public partial class PlayerMurder : Sandbox.Player
 	{
 		base.OnKilled();
 
-		if ( !IsZombie )
-		{
-			Inventory.DropActive();
-		}
+
+		Inventory.DropActive();
+		
 		Inventory.DeleteContents();
 
 		BecomeRagdollOnClient( LastDamage.Force, GetHitboxBone( LastDamage.HitboxIndex ) );
@@ -213,11 +134,7 @@ public partial class PlayerMurder : Sandbox.Player
 
 		if ( LifeState != LifeState.Alive )
 			return;
-
-		if ( !IsZombie )
-		{
-			TickPlayerUse();
-		}
+		
 
 		if ( Input.Pressed( InputButton.View ) )
 		{
@@ -231,33 +148,20 @@ public partial class PlayerMurder : Sandbox.Player
 			}
 		}
 
-		if ( !IsZombie )
+
+		if ( Input.Pressed( InputButton.Drop ) )
 		{
-			if ( Input.Pressed( InputButton.Drop ) )
+			var dropped = Inventory.DropActive();
+			if ( dropped != null )
 			{
-				var dropped = Inventory.DropActive();
-				if ( dropped != null )
+				if ( dropped.PhysicsGroup != null )
 				{
-					if ( dropped.PhysicsGroup != null )
-					{
-						dropped.PhysicsGroup.Velocity = Velocity + (EyeRot.Forward + EyeRot.Up) * 300;
-					}
-
-					timeSinceDropped = 0;
-					SwitchToBestWeapon();
+					dropped.PhysicsGroup.Velocity = Velocity + (EyeRot.Forward + EyeRot.Up) * 300;
 				}
+
+				timeSinceDropped = 0;
+				SwitchToBestWeapon();
 			}
-			
-
-
-			/*if ( ActionName != "none" )
-			{
-				HumanAction(ActionName);
-			}*/
-		}
-		else
-		{
-			
 		}
 
 		SimulateActiveChild( cl, ActiveChild );
@@ -286,11 +190,8 @@ public partial class PlayerMurder : Sandbox.Player
 
 	public override void StartTouch( Entity other )
 	{
-		if ( !IsZombie )
-		{
-			if ( timeSinceDropped < 1 ) return;
-			base.StartTouch( other );
-		}
+		if ( timeSinceDropped < 1 ) return;
+		base.StartTouch( other );
 	}
 
 	Rotation lastCameraRot = Rotation.Identity;
@@ -380,22 +281,6 @@ public partial class PlayerMurder : Sandbox.Player
 		}
 
 		base.TakeDamage( info );
-
-		if ( !IsZombie )
-		{
-			if ( GenderType )
-			{
-				PlaySound( "humansmalepain.pain" );
-			}
-			else
-			{
-				PlaySound( "humansfemalepain.pain" );
-			}
-		}
-		else
-		{
-			PlaySound( "zombiepain.pain" );
-		}
 
 		if ( info.Attacker is PlayerMurder attacker && attacker != this )
 		{
