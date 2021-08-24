@@ -1,24 +1,16 @@
 ﻿using Sandbox;
 using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using System.Threading;
-using ZombiePanic;
-//using MurderFrance.ui;
-using System.Threading.Tasks;
 
-public partial class PlayerMurder : Sandbox.Player
+partial class DeathmatchPlayer : Player
 {
-	TimeSince timeSinceDropped; 
+	TimeSince timeSinceDropped;
 
 	public bool SupressPickupNotices { get; private set; }
-	[Net] public bool IsMurder { get; set; }
-	
-	[Net] public bool IsSherif { get; set; }
-	[Net] public bool IsDead { get; set; }
 
-	public PlayerMurder()
+	public DeathmatchPlayer()
 	{
 		Inventory = new DmInventory( this );
 	}
@@ -26,33 +18,6 @@ public partial class PlayerMurder : Sandbox.Player
 	public override void Respawn()
 	{
 		SetModel( "models/citizen/citizen.vmdl" );
-		
-		if ( MurderFrance.MurderFrance.Instance.IsGameIsLaunch  || MurderFrance.MurderFrance.Instance.InialiseGameEnd)
-		{
-
-			if ( this.Tags.Has( "murder" ) )
-			{
-				IsMurder = true;
-				Inventory.DeleteContents();
-			}
-			
-			if ( this.Tags.Has( "sherif" ) )
-			{
-				IsSherif = true;
-				Inventory.DeleteContents();
-			}
-			
-		}
-		else
-		{
-			IsMurder = false;
-			IsSherif = false;
-			Inventory.DeleteContents();
-			
-			this.Tags.Remove( "sherif" );
-			this.Tags.Remove( "murder" );
-		}
-
 
 		Controller = new WalkController();
 		Animator = new StandardPlayerAnimator();
@@ -62,61 +27,43 @@ public partial class PlayerMurder : Sandbox.Player
 		EnableDrawing = true; 
 		EnableHideInFirstPerson = true;
 		EnableShadowInFirstPerson = true;
-		
 
 		Dress();
 		ClearAmmo();
 
 		SupressPickupNotices = true;
-		
 
-		if ( IsMurder )
-		{
-			Inventory.Add( new Hand(), true );
-			GiveAmmo( AmmoType.Pistol, 100 );
-		}
-		
-		
+		Inventory.Add( new Pistol(), true );
+		Inventory.Add( new Shotgun() );
+		Inventory.Add( new SMG() );
+		Inventory.Add( new Crossbow() );
+
+		GiveAmmo( AmmoType.Pistol, 100 );
+		GiveAmmo( AmmoType.Buckshot, 8 );
+		GiveAmmo( AmmoType.Crossbow, 4 );
 
 		SupressPickupNotices = false;
-		
 		Health = 100;
 
-		IsDead = false;
-		
-		
 		base.Respawn();
 	}
-
 	public override void OnKilled()
 	{
 		base.OnKilled();
 
-
 		Inventory.DropActive();
-		
 		Inventory.DeleteContents();
 
 		BecomeRagdollOnClient( LastDamage.Force, GetHitboxBone( LastDamage.HitboxIndex ) );
-		
-		GetClientOwner().SetScore("deaths", GetClientOwner().GetScore<int>("deaths", 0) + 1);
-
-		var LasAttacker = LastAttacker;
-
-		if ( LasAttacker != null )
-		{
-			LasAttacker.GetClientOwner().SetScore("kills", LasAttacker.GetClientOwner().GetScore<int>("kills", 0) + 1);
-		}
 
 		Controller = null;
 		Camera = new SpectateRagdollCamera();
 
 		EnableAllCollisions = false;
 		EnableDrawing = false;
-
-		IsDead = true;
 	}
-	
+
+
 	public override void Simulate( Client cl )
 	{
 		//if ( cl.NetworkIdent == 1 )
@@ -134,7 +81,8 @@ public partial class PlayerMurder : Sandbox.Player
 
 		if ( LifeState != LifeState.Alive )
 			return;
-		
+
+		TickPlayerUse();
 
 		if ( Input.Pressed( InputButton.View ) )
 		{
@@ -147,7 +95,6 @@ public partial class PlayerMurder : Sandbox.Player
 				Camera = new ThirdPersonCamera();
 			}
 		}
-
 
 		if ( Input.Pressed( InputButton.Drop ) )
 		{
@@ -191,6 +138,7 @@ public partial class PlayerMurder : Sandbox.Player
 	public override void StartTouch( Entity other )
 	{
 		if ( timeSinceDropped < 1 ) return;
+
 		base.StartTouch( other );
 	}
 
@@ -282,7 +230,7 @@ public partial class PlayerMurder : Sandbox.Player
 
 		base.TakeDamage( info );
 
-		if ( info.Attacker is PlayerMurder attacker && attacker != this )
+		if ( info.Attacker is DeathmatchPlayer attacker && attacker != this )
 		{
 			// Note - sending this only to the attacker!
 			attacker.DidDamage( To.Single( attacker ), info.Position, info.Damage, Health.LerpInverse( 100, 0 ) );
@@ -290,7 +238,7 @@ public partial class PlayerMurder : Sandbox.Player
 			TookDamage( To.Single( this ), info.Weapon.IsValid() ? info.Weapon.Position : info.Attacker.Position );
 		}
 	}
-	
+
 	[ClientRpc]
 	public void DidDamage( Vector3 pos, float amount, float healthinv )
 	{

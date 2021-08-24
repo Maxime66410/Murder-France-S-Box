@@ -1,8 +1,12 @@
-code/*.csproj
-code/obj
-code/Properties/launchSettings.json
-.idea
+
+.codegen/
+obj/
+code/accesslist.txt
 .intermediate
 tools_asset_info.bin
-_bakeresourcecache
+code/Properties/launchSettings.json
+dm98.csproj
+Properties/launchSettings.json
 tools_thumbnail_cache.bin
+code/dm98.csproj
+code/dm98.csproj

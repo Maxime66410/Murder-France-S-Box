@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-partial class PlayerMurder
+partial class DeathmatchPlayer
 {
 	[Net]
 	public List<int> Ammo { get; set; } = new (); // todo - networkable dictionaries
@@ -60,5 +60,7 @@ partial class PlayerMurder
 
 public enum AmmoType
 {
-	Pistol
+	Pistol,
+	Buckshot,
+	Crossbow
 }

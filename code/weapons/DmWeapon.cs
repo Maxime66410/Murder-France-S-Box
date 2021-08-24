@@ -33,7 +33,7 @@ partial class BaseDmWeapon : BaseWeapon, IRespawnableEntity
 
 	public int AvailableAmmo()
 	{
-		var owner = Owner as PlayerMurder;
+		var owner = Owner as DeathmatchPlayer;
 		if ( owner == null ) return 0;
 		return owner.AmmoCount( AmmoType );
 	}
@@ -70,14 +70,14 @@ partial class BaseDmWeapon : BaseWeapon, IRespawnableEntity
 
 		TimeSinceReload = 0;
 
-		if ( Owner is PlayerMurder player )
+		if ( Owner is DeathmatchPlayer player )
 		{
 			if ( player.AmmoCount( AmmoType ) <= 0 )
 				return;
 		}
 
 		IsReloading = true;
-		
+
 		(Owner as AnimEntity).SetAnimBool( "b_reload", true );
 
 		StartReloadEffects();
@@ -103,7 +103,7 @@ partial class BaseDmWeapon : BaseWeapon, IRespawnableEntity
 	{
 		IsReloading = false;
 
-		if ( Owner is PlayerMurder player )
+		if ( Owner is DeathmatchPlayer player )
 		{
 			var ammo = player.TakeAmmo( AmmoType, ClipSize - AmmoClip );
 			if ( ammo == 0 )

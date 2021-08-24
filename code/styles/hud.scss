@@ -6,7 +6,6 @@
 @import "_killfeed.scss";
 @import "_pickupfeed.scss";
 @import "_scoreboard.scss";
-@import "_actionmenu.scss";
 
 rootpanel
 {
@@ -45,82 +44,8 @@ vitals
 			color: #f00;
 			text-shadow: 0px 0px 10px #f005;
 		}
-
-		&.team
-		{
-			left : 80px;
-			color: rgb(156, 255, 64);
-			font-size: 60px;
-		}
-		
-		&.teammurder
-		{
-			left : 80px;
-			color: rgb(255, 64, 64);
-			font-size: 60px;
-		}
-
-		&.teamsherif
-		{
-			left : 80px;
-			color: rgb(0, 193, 217);
-			font-size: 60px;
-		}
 	}
 }
-
-timerui
-{
-	position: absolute;
-	color: #ff0;
-	mix-blend-mode: lighten;
-	font-family: Roboto;
-
-	Label
-	{
-
-		text-shadow: 0px 0px 20px #f70a;
-		
-		&.timer
-		{
-			top: 20px;
-			left: 900px;
-			color: rgb(156, 255, 64);
-			font-size: 30px;
-		}
-	}
-}
-
-whowinui
-{
-	position: absolute;
-	color: #ff0;
-	mix-blend-mode: lighten;
-	font-family: Roboto;
-
-	Label
-	{
-
-		text-shadow: 0px 0px 20px #f70a;
-
-		&.winwho
-		{
-			top: 500px;
-			left: 730px;
-			color: rgb(156, 255, 64);
-			font-size: 100px;
-		}
-
-		&.winwhoz
-		{
-			top: 500px;
-			left: 730px;
-			color: rgb(156, 255, 64);
-			font-size: 100px;
-		}
-	}
-}
-
 
 
 ammo

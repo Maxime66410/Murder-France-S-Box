@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-partial class PlayerMurder
+partial class DeathmatchPlayer
 {
 	// TODO - make ragdolls one per entity
 	// TODO - make ragdolls dissapear after a load of seconds
@@ -57,6 +57,7 @@ partial class PlayerMurder
 				ent.PhysicsGroup.AddVelocity( force );
 			}
 		}
+
 
 		Corpse = ent;
 

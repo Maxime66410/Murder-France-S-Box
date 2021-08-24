@@ -13,7 +13,7 @@ partial class DmInventory : BaseInventory
 
 	public override bool Add( Entity ent, bool makeActive = false )
 	{
-		var player = Owner as PlayerMurder;
+		var player = Owner as DeathmatchPlayer;
 		var weapon = ent as BaseDmWeapon;
 		var notices = !player.SupressPickupNotices;
 		//
