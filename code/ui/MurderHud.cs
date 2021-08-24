@@ -6,9 +6,9 @@ using System;
 using System.Threading.Tasks;
 
 [Library]
-public partial class DeathmatchHud : HudEntity<RootPanel>
+public partial class MurderHud : HudEntity<RootPanel>
 {
-	public DeathmatchHud()
+	public MurderHud()
 	{
 		if ( !IsClient )
 			return;
@@ -26,7 +26,6 @@ public partial class DeathmatchHud : HudEntity<RootPanel>
 		RootPanel.AddChild<PickupFeed>();
 		
 		RootPanel.AddChild<ChatBox>();
-		RootPanel.AddChild<KillFeed>();
 		RootPanel.AddChild<Scoreboard>();
 		RootPanel.AddChild<VoiceList>();
 	}

@@ -1,7 +1,7 @@
 ﻿using Sandbox;
 
 
-[Library( "dm_pistol", Title = "Pistol" )]
+[Library( "mf_pistol", Title = "Pistol" )]
 [Hammer.EditorModel( "weapons/rust_pistol/rust_pistol.vmdl" )]
 partial class Pistol : BaseDmWeapon
 { 
@@ -9,7 +9,9 @@ partial class Pistol : BaseDmWeapon
 
 	public override float PrimaryRate => 15.0f;
 	public override float SecondaryRate => 1.0f;
-	public override float ReloadTime => 3.0f;
+	public override float ReloadTime => 5.0f;
+	
+	public override int ClipSize => 1;
 
 	public override int Bucket => 1;
 
@@ -18,7 +20,7 @@ partial class Pistol : BaseDmWeapon
 		base.Spawn();
 
 		SetModel( "weapons/rust_pistol/rust_pistol.vmdl" );
-		AmmoClip = 12;
+		AmmoClip = 1;
 	}
 
 	public override bool CanPrimaryAttack()
@@ -48,7 +50,7 @@ partial class Pistol : BaseDmWeapon
 		// Shoot the bullets
 		//
 		//Rand.SetSeed( Time.Tick );
-		ShootBullet( 0.2f, 1.5f, 9.0f, 3.0f );
+		ShootBullet( 0.2f, 3.5f, 300.0f, 3.0f );
 
 	}
 }
