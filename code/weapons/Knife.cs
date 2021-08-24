@@ -13,6 +13,8 @@ partial class Knife : BaseDmWeapon
 	public override int Bucket => 0;
 	public virtual int BaseDamage => 35;
 	public virtual int MeleeDistance => 80;
+	
+	public override AmmoType AmmoType => AmmoType.Knife;
 
 	public override void Spawn()
 	{

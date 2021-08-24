@@ -61,5 +61,6 @@ partial class DeathmatchPlayer
 public enum AmmoType
 {
 	Pistol,
-	Hand
+	Hand,
+	Knife
 }
