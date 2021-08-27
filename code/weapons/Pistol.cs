@@ -19,7 +19,7 @@ partial class Pistol : BaseDmWeapon
 	{
 		base.Spawn();
 
-		SetModel( "weapons/rust_pistol/rust_pistol.vmdl" );
+		SetModel( "weapons/pistol/pistolbarreta.vmdl" );
 		AmmoClip = 1;
 	}
 

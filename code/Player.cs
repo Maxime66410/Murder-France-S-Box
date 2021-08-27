@@ -7,8 +7,11 @@ using System.Threading;
 partial class DeathmatchPlayer : Player
 {
 	TimeSince timeSinceDropped;
-
 	public bool SupressPickupNotices { get; private set; }
+	
+	[Net] public bool IsDead { get; set; }
+	[Net] public bool IsMurder { get; set; }
+	[Net] public bool IsSherif { get; set; }
 
 	public DeathmatchPlayer()
 	{
@@ -17,6 +20,9 @@ partial class DeathmatchPlayer : Player
 
 	public override void Respawn()
 	{
+		if(!MurderGame.Instance.RespawnEnabled)
+			return;
+		
 		SetModel( "models/citizen/citizen.vmdl" );
 
 		Controller = new WalkController();
@@ -30,17 +36,60 @@ partial class DeathmatchPlayer : Player
 
 		Dress();
 		ClearAmmo();
+		Inventory.DeleteContents();
 
 		SupressPickupNotices = true;
 
-		//Inventory.Add( new Pistol() );
-		//Inventory.Add( new Hand(), true );
-		//Inventory.Add( new Knife() );
+		if ( !MurderGame.Instance.IsGameIsLaunch )
+		{
+			this.Tags.Add("invite");
+			
+			if ( this.Tags.Has( "tueur" ) )
+			{
+				this.Tags.Remove("tueur");
+			}
 
-		GiveAmmo( AmmoType.Pistol, 100 );
+			if ( this.Tags.Has( "agent" ) )
+			{
+				this.Tags.Remove("agent");
+			}
+			
+		}
+
+		if ( MurderGame.Instance.IsGameIsLaunch )
+		{
+			if ( this.Tags.Has( "invite" ) )
+			{
+				Inventory.Add( new Hand(), true );
+				IsMurder = false;
+				IsSherif = false;
+			}
+
+			if ( this.Tags.Has( "tueur" ) )
+			{
+				Inventory.Add( new Hand(), true );
+				Inventory.Add( new Knife() );
+				IsMurder = true;
+				IsSherif = false;
+			}
+
+			if ( this.Tags.Has( "agent" ) )
+			{
+				Inventory.Add( new Hand(), true );
+				Inventory.Add( new Pistol() );
+				IsMurder = false;
+				IsSherif = true;
+			}
+		}
+
+		GiveAmmo( AmmoType.Pistol, 9999 );
+		GiveAmmo( AmmoType.Hand, 9999 );
+		GiveAmmo( AmmoType.Knife, 9999 );
 
 		SupressPickupNotices = false;
 		Health = 100;
+
+		IsDead = false;
 
 		base.Respawn();
 	}
@@ -58,6 +107,21 @@ partial class DeathmatchPlayer : Player
 
 		EnableAllCollisions = false;
 		EnableDrawing = false;
+
+		IsDead = true;
+		
+		if ( MurderGame.Instance.IsGameIsLaunch )
+		{
+			Camera = new MurderSpectate();
+		}
+	}
+	
+	public void MakeSpectator()
+	{
+		EnableAllCollisions = false;
+		EnableDrawing = false;
+		Controller = null;
+		Camera = new MurderSpectate();
 	}
 
 

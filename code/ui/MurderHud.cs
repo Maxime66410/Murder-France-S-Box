@@ -16,7 +16,7 @@ public partial class MurderHud : HudEntity<RootPanel>
 		RootPanel.StyleSheet.Load( "/styles/hud.scss" );
 
 		RootPanel.AddChild<Vitals>();
-		RootPanel.AddChild<Ammo>();
+		RootPanel.AddChild<Teams>();
 
 		RootPanel.AddChild<NameTags>();
 		RootPanel.AddChild<DamageIndicator>();

@@ -3,7 +3,6 @@
 @import "_damageindicator.scss";
 @import "_hitindicator.scss";
 @import "_inventory.scss";
-@import "_killfeed.scss";
 @import "_pickupfeed.scss";
 @import "_scoreboard.scss";
 
@@ -47,8 +46,53 @@ vitals
 	}
 }
 
+timerui
+{
+	position: absolute;
+	color: #ff0;
+	mix-blend-mode: lighten;
+	font-family: Roboto;
 
-ammo
+	Label
+	{
+
+		text-shadow: 0px 0px 20px #f70a;
+
+		&.timer
+		{
+			top: 20px;
+			left: 900px;
+			color: rgb(156, 255, 64);
+			font-size: 30px;
+		}
+	}
+}
+
+whowinui
+{
+	position: absolute;
+	color: #ff0;
+	mix-blend-mode: lighten;
+	font-family: Roboto;
+
+	Label
+	{
+
+		text-shadow: 0px 0px 20px #f70a;
+
+		&.winwho
+		{
+			top: 500px;
+			left: 730px;
+			color: rgb(156, 255, 64);
+			font-size: 100px;
+		}
+	}
+}
+
+
+
+teams
 {
 	position: absolute;
 	bottom: 64px;
@@ -62,30 +106,41 @@ ammo
 	{
 		text-shadow: 0px 0px 20px #f70a;
 
-		&.danger
+		&.teambystander
 		{
-			color: #f00;
+			color: rgb(64, 201, 255);
+			font-size: 60px;
+		}
+
+		&.teammurder
+		{
+			color: rgb(255, 64, 64);
+			font-size: 60px;
+		}
+
+		&.teamsherif
+		{
+			color: rgb(64, 255, 105);
+			font-size: 60px;
 		}
 	}
 }
 
 
-.dm_pistol .icon
+.mf_pistol .icon
 {
 	background-image: url( /ui/weapons/dm_pistol.png );
 }
 
-.dm_shotgun .icon
+.mf_hand .icon
 {
-	background-image: url( /ui/weapons/dm_shotgun.png );
+	background-image: url( /ui/weapons/hand.png );
 }
 
-.dm_smg .icon
+.mf_knife .icon
 {
-	background-image: url( /ui/weapons/dm_smg.png );
+	background-image: url( /ui/weapons/knife.png );
 }
 
-.dm_crossbow .icon, .crossbow_bolt .icon
-{
-	background-image: url( /ui/weapons/dm_crossbow.png );
-}
+
+

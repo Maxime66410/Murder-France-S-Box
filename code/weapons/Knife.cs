@@ -1,11 +1,11 @@
 ﻿using Sandbox;
 using System;
 
-[Library("mf_knife", Title = "Knife", Spawnable = true)]
-[Hammer.EditorModel("weapons/rust_boneknife/rust_boneknife.vmdl")]
+[Library("mf_knife", Title = "Knife", Spawnable = false)]
+[Hammer.EditorModel("weapons/knifebayonet.vmdl")]
 partial class Knife : BaseDmWeapon
 {
-	public override string ViewModelPath => "weapons/rust_boneknife/v_rust_boneknife.vmdl";
+	public override string ViewModelPath => "weapons/v_knifebayonet.vmdl";
 	public override int ClipSize => -1;
 	public override float PrimaryRate => 1.0f;
 	public override float SecondaryRate => 0.5f;
@@ -20,7 +20,7 @@ partial class Knife : BaseDmWeapon
 	{
 		base.Spawn();
 
-		SetModel("weapons/rust_boneknife/rust_boneknife.vmdl");
+		SetModel("weapons/knifebayonet.vmdl");
 	}
 
 	public virtual void MeleeStrike(float damage, float force)
@@ -52,7 +52,7 @@ partial class Knife : BaseDmWeapon
 	{
 		//if (!CanPrimaryAttack()) return;
 		
-		PlaySound("rust_boneknife.attack");
+		//PlaySound("rust_boneknife.attack");
 		MeleeStrike(BaseDamage * 150.0f, 1.5f);
 		
 		(Owner as AnimEntity).SetAnimBool("b_attack", true);
@@ -67,7 +67,7 @@ partial class Knife : BaseDmWeapon
 		(Owner as AnimEntity).SetAnimBool("b_attack", true);
 
 		ShootEffects();
-		PlaySound("rust_boneknife.attack");
+		//PlaySound("rust_boneknife.attack");
 		MeleeStrike(BaseDamage * 300.0f, 1.5f);
 	}
 

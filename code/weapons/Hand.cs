@@ -9,7 +9,7 @@ partial class Hand : BaseDmWeapon
 
 	public override float PrimaryRate => 15.0f;
 	public override float SecondaryRate => 1.0f;
-	public override float ReloadTime => 3.0f;
+	public override float ReloadTime => 8.0f;
 
 	public override AmmoType AmmoType => AmmoType.Hand;
 
