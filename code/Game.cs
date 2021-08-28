@@ -206,7 +206,7 @@ public partial class MurderGame : Game
 			target.Pawn.Tags.Add( "tueur" );
 			
 			Random rands = new Random();
-			var targets = Client.All[rand.Next( Client.All.Count )];
+			var targets = Client.All[rands.Next( Client.All.Count )];
 			if ( !targets.Pawn.Tags.Has( "tueur" ) )
 			{
 				targets.Pawn.Tags.Add( "agent" );
