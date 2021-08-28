@@ -199,15 +199,35 @@ public partial class MurderGame : Game
 			}
 		}
 
+		public void GetAgent()
+		{
+			var found = false;
+
+			foreach ( Client client in Client.All )
+			{
+				if ( client.Pawn is not DeathmatchPlayer player )
+					continue;
+
+				if ( player.Tags.Has( "tueur" ) )
+					continue;
+
+				found = true;
+				
+				player.Tags.Add("agent");
+				break;
+			}
+			
+			if(!found)
+				GetAgent();
+		}
+		
 		public void OnStartGame()
 		{
 			Random rand = new Random();
 			var target = Client.All[rand.Next( Client.All.Count )];
 			target.Pawn.Tags.Add( "tueur" );
-			
-			Random rands = new Random();
-			var targets = Client.All[rands.Next( Client.All.Count )];
-			targets.Pawn.Tags.Add( "agent" );
+
+			GetAgent();
 
 			foreach ( Client clients in Client.All )
 			{
@@ -227,6 +247,7 @@ public partial class MurderGame : Game
 			Instance.RespawnEnabled = false;
 
 		}
+		
 
 		public void OnFinishGame()
 		{
