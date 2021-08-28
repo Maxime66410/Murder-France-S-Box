@@ -1,0 +1,110 @@
+﻿timer{
+
+  .IsNotGame{
+    background-color: #000c;
+    border: 1px solid #1b1b1b;
+    border-radius: 8px;
+
+    font-family: Poppins;
+    min-width: 200px;
+    width: 600px;
+    max-width: 800px;
+    min-height: 50px;
+    height: 20px;
+    max-height: 800px;
+    transform: translateX(120%) translateY(50%);
+    animation: slide-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  //  top: 5%;
+    //transform: translateX(-50%) translateY(-50%); // waiting for https://github.com/Facepunch/sbox-issues/issues/551
+    position: absolute;
+
+    color: #fafafa;
+    font-family: Poppins;
+    font-weight: 500;
+    // pointer-events: all;
+    flex-direction: column;
+
+    font-size: 16px;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 5px black;
+
+  }
+
+  .IsInGame{
+    background-color: #000c;
+    border: 1px solid #1b1b1b;
+    border-radius: 8px;
+
+    font-family: Poppins;
+    min-width: 200px;
+    width: 600px;
+    max-width: 800px;
+    min-height: 50px;
+    height: 20px;
+    max-height: 800px;
+    transform: translateX(120%) translateY(0%);
+    //top: 1%;
+    //transform: translateX(-50%) translateY(-50%); // waiting for https://github.com/Facepunch/sbox-issues/issues/551
+    position: absolute;
+
+    color: #fafafa;
+    font-family: Poppins;
+    font-weight: 500;
+    // pointer-events: all;
+    flex-direction: column;
+
+    font-size: 16px;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 5px black;
+
+    &.tueurtext
+    {
+      color: rgb(255, 64, 64);
+    }
+
+    &.invitetext
+    {
+      color: rgb(64, 201, 255);
+    }
+
+    &.agenttext
+    {
+      color: rgb(64, 255, 105);
+    }
+
+  }
+
+  &.label
+  {
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    bottom: 10px;
+    position: absolute;
+    padding: 35px 0px;
+    text-shadow: 0px 2px 3px black;
+    
+      &.tueurtext
+      {
+        color: rgb(255, 64, 64);
+      }
+    
+      &.invitetext
+      {
+        color: rgb(64, 201, 255);
+      }
+    
+      &.agenttext
+      {
+        color: rgb(64, 255, 105);
+      }
+  }
+  
+}

@@ -17,6 +17,7 @@ public partial class MurderHud : HudEntity<RootPanel>
 
 		RootPanel.AddChild<Vitals>();
 		RootPanel.AddChild<Teams>();
+		RootPanel.AddChild<Timer>();
 
 		RootPanel.AddChild<NameTags>();
 		RootPanel.AddChild<DamageIndicator>();

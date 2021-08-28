@@ -5,6 +5,7 @@
 @import "_inventory.scss";
 @import "_pickupfeed.scss";
 @import "_scoreboard.scss";
+@import "_time.scss";
 
 rootpanel
 {
@@ -42,28 +43,6 @@ vitals
 		{
 			color: #f00;
 			text-shadow: 0px 0px 10px #f005;
-		}
-	}
-}
-
-timerui
-{
-	position: absolute;
-	color: #ff0;
-	mix-blend-mode: lighten;
-	font-family: Roboto;
-
-	Label
-	{
-
-		text-shadow: 0px 0px 20px #f70a;
-
-		&.timer
-		{
-			top: 20px;
-			left: 900px;
-			color: rgb(156, 255, 64);
-			font-size: 30px;
 		}
 	}
 }
