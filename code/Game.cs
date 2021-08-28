@@ -207,14 +207,9 @@ public partial class MurderGame : Game
 			
 			Random rands = new Random();
 			var targets = Client.All[rands.Next( Client.All.Count )];
-			if ( !target.Pawn.Tags.Has( "tueur" ) )
-			{
-				Random randss = new Random();
-				targets = Client.All[randss.Next( Client.All.Count )];
-				targets.Pawn.Tags.Add( "agent" );
-			}
+			targets.Pawn.Tags.Add( "agent" );
 
-				foreach ( Client clients in Client.All )
+			foreach ( Client clients in Client.All )
 			{
 				if ( clients.Pawn is not DeathmatchPlayer player )
 				{
