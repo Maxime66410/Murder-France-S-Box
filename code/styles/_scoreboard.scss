@@ -29,33 +29,18 @@
 	.name
 	{
 		flex-grow: 1;
+		left: 225px;
 	}
-
-	.deaths, .kills, .ping, .fps
-	{
-		width: 90px;
-		text-align: right;
-	}
-
-	.ping, .fps
-	{
-		opacity: 0.3;
-		width: 50px;
-	}
-
-	.deaths
-	{
-		margin-right: 50px;
-	}
+	
 
 	.header
 	{
 		font-weight: 500;
-		border-bottom: 3px solid #fc0;
+		border-bottom: 3px solid #00ffcc;
 		min-width: 30%;
 		margin-bottom: 10px;
 		padding-bottom: 5px;
-		color: #fc0;
+		color: #00ffcc;
 		mix-blend-mode: lighten;
 	}
 
@@ -75,7 +60,7 @@
 
 			label
 			{
-				//text-shadow: 0px 0px 10px #f70a;
+				text-shadow: 0px 0px 10px #00ffcc;
 			}
 
 			&.me
