@@ -68,7 +68,7 @@ partial class Knife : BaseDmWeapon
 
 		ShootEffects();
 		//PlaySound("rust_boneknife.attack");
-		MeleeStrike(BaseDamage * 300.0f, 1.5f);
+		MeleeStrike(BaseDamage * 300.0f, 5.5f);
 	}
 
 	[ClientRpc]
@@ -85,4 +85,5 @@ partial class Knife : BaseDmWeapon
 		anim.SetParam("holdtype", 4); // TODO this is shit
 		anim.SetParam("aimat_weight", 1.0f);
 	}
+	
 }

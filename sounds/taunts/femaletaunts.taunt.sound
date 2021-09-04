@@ -1,0 +1,32 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		UI = false
+		Volume = 1.0
+		VolumeRandom = 0.0
+		Pitch = 1.0
+		PitchRandom = 0.0
+		DistanceMax = 350.0
+		Sounds = 
+		[
+			"sounds/taunts/female/busy02.vsnd",
+			"sounds/taunts/female/doingsomething.vsnd",
+			"sounds/taunts/female/gethellout.vsnd",
+			"sounds/taunts/female/gordead_ques07.vsnd",
+			"sounds/taunts/female/help01.vsnd",
+			"sounds/taunts/female/notthemanithought01.vsnd",
+			"sounds/taunts/female/notthemanithought02.vsnd",
+			"sounds/taunts/female/question06.vsnd",
+			"sounds/taunts/female/question09.vsnd",
+			"sounds/taunts/female/question15.vsnd",
+			"sounds/taunts/female/question20.vsnd",
+			"sounds/taunts/female/question25.vsnd",
+			"sounds/taunts/female/question30.vsnd",
+			"sounds/taunts/female/question31.vsnd",
+			"sounds/taunts/female/runforyourlife01.vsnd",
+			"sounds/taunts/female/runforyourlife02.vsnd",
+			"sounds/taunts/female/watchout.vsnd",
+		]
+	}
+}

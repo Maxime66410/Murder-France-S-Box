@@ -12,6 +12,9 @@ partial class DeathmatchPlayer : Player
 	[Net] public bool IsDead { get; set; }
 	[Net] public bool IsMurder { get; set; }
 	[Net] public bool IsSherif { get; set; }
+	[Net] public bool Gender { get; set; }
+
+	private  int CanTaunt = 0;
 
 	public DeathmatchPlayer()
 	{
@@ -22,6 +25,21 @@ partial class DeathmatchPlayer : Player
 	{
 		if(!MurderGame.Instance.RespawnEnabled)
 			return;
+		
+		var RandomGender = new Random();
+		var ResultGender = RandomGender.Next( 0, 2 );
+		
+		Log.Info(ResultGender);
+
+		if ( ResultGender == 0 )
+		{
+			Gender = true;
+		}
+
+		if ( ResultGender == 1 )
+		{
+			Gender = false;
+		}
 		
 		SetModel( "models/citizen/citizen.vmdl" );
 
@@ -109,7 +127,7 @@ partial class DeathmatchPlayer : Player
 		EnableDrawing = false;
 
 		IsDead = true;
-		
+
 		if ( MurderGame.Instance.IsGameIsLaunch )
 		{
 			Camera = new MurderSpectate();
@@ -123,7 +141,6 @@ partial class DeathmatchPlayer : Player
 		Controller = null;
 		Camera = new MurderSpectate();
 	}
-
 
 	public override void Simulate( Client cl )
 	{
@@ -181,6 +198,27 @@ partial class DeathmatchPlayer : Player
 		if ( ActiveChild is BaseDmWeapon weapon && !weapon.IsUsable() && weapon.TimeSincePrimaryAttack > 0.5f && weapon.TimeSinceSecondaryAttack > 0.5f )
 		{
 			SwitchToBestWeapon();
+		}
+
+		if ( CanTaunt == 0 )
+		{
+			if ( Input.Pressed( InputButton.Flashlight ) )
+			{
+				if ( Gender )
+            	{
+            		PlaySound("maletaunts.taunt");
+            	}
+            	else
+            	{
+            		PlaySound("femaletaunts.taunt");
+            	}
+
+				CanTaunt = 150;
+			}
+		}
+		else
+		{
+			CanTaunt--;
 		}
 	}
 

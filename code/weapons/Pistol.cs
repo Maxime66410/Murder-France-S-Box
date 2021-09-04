@@ -2,10 +2,10 @@
 
 
 [Library( "mf_pistol", Title = "Pistol" )]
-[Hammer.EditorModel( "weapons/rust_pistol/rust_pistol.vmdl" )]
+[Hammer.EditorModel( "weapons/pistol/pistolbarreta.vmdl" )]
 partial class Pistol : BaseDmWeapon
 { 
-	public override string ViewModelPath => "weapons/rust_pistol/v_rust_pistol.vmdl";
+	public override string ViewModelPath => "weapons/pistol/v_pistolbarreta.vmdl";
 
 	public override float PrimaryRate => 15.0f;
 	public override float SecondaryRate => 1.0f;
@@ -50,7 +50,7 @@ partial class Pistol : BaseDmWeapon
 		// Shoot the bullets
 		//
 		//Rand.SetSeed( Time.Tick );
-		ShootBullet( 0.2f, 3.5f, 1000.0f, 3.0f );
+		ShootBullet( 0.2f, 3.5f, 10000.0f, 3.0f );
 
 	}
 }

@@ -62,21 +62,21 @@
 				[
 					{
 						_class = "PhysicsShapeCylinder"
-						parent_bone = "root"
-						surface_prop = "default"
-						collision_prop = "default"
-						radius = 2.0
-						point0 = [ 1.296841, 0.0, 5.489138 ]
-						point1 = [ -1.073415, 0.0, 0.0 ]
-					},
-					{
-						_class = "PhysicsShapeCylinder"
 						parent_bone = "Fire"
 						surface_prop = "default"
 						collision_prop = "default"
 						radius = 2.0
 						point0 = [ -11.009659, 0.0, -1.092885 ]
 						point1 = [ 1.747506, 0.0, -1.20731 ]
+					},
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = "hold_R"
+						surface_prop = "metal"
+						collision_prop = "default"
+						origin = [ 5.141409, 0.021648, -0.196556 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						dimensions = [ 16.742857, 2.80444, 11.030329 ]
 					},
 				]
 			},

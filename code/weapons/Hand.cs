@@ -7,9 +7,9 @@ partial class Hand : BaseDmWeapon
 { 
 	public override string ViewModelPath => "";
 
-	public override float PrimaryRate => 15.0f;
+	public override float PrimaryRate => 1.8f;
 	public override float SecondaryRate => 1.0f;
-	public override float ReloadTime => 8.0f;
+	public override float ReloadTime => 15.0f;
 
 	public override AmmoType AmmoType => AmmoType.Hand;
 
@@ -30,9 +30,9 @@ partial class Hand : BaseDmWeapon
 
 	public override void AttackPrimary()
 	{
-
+		
 	}
-	
+
 	public override void SimulateAnimator(PawnAnimator anim)
 	{
 		anim.SetParam("holdtype", 0); // TODO this is shit

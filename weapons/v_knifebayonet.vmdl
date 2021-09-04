@@ -6,73 +6,6 @@
 		children = 
 		[
 			{
-				_class = "Skeleton"
-				children = 
-				[
-					{
-						_class = "Bone"
-						name = "root"
-						children = 
-						[
-							{
-								_class = "Bone"
-								name = "L"
-								origin = [ 0.0, 31.901619, -9.224954 ]
-								angles = [ 0.0, 0.0, 0.0 ]
-								do_not_discard = true
-							},
-							{
-								_class = "Bone"
-								name = "R"
-								children = 
-								[
-									{
-										_class = "Bone"
-										name = "R1"
-										children = 
-										[
-											{
-												_class = "Bone"
-												name = "R2"
-												children = 
-												[
-													{
-														_class = "Bone"
-														name = "R3"
-														origin = [ 8.378382, 2.608505, -0.540208 ]
-														angles = [ 0.0, 0.0, 0.0 ]
-														do_not_discard = true
-													},
-													{
-														_class = "Bone"
-														name = "R_Hold"
-														origin = [ 11.309168, 5.894073, -0.540208 ]
-														angles = [ 0.0, 0.0, 0.0 ]
-														do_not_discard = true
-													},
-												]
-												origin = [ 29.836443, 3.949751, -0.540208 ]
-												angles = [ 0.0, 0.0, 0.0 ]
-												do_not_discard = true
-											},
-										]
-										origin = [ 19.347136, 1.349726, -3.885914 ]
-										angles = [ 0.0, 0.0, 0.0 ]
-										do_not_discard = true
-									},
-								]
-								origin = [ 0.0, -31.691748, -9.224954 ]
-								angles = [ 0.0, 0.0, 0.0 ]
-								do_not_discard = true
-							},
-						]
-						origin = [ 0.0, 0.0, 0.0 ]
-						angles = [ 0.0, 0.0, 0.0 ]
-						do_not_discard = true
-					},
-				]
-			},
-			{
 				_class = "MaterialGroupList"
 				children = 
 				[
@@ -81,12 +14,16 @@
 						remaps = 
 						[
 							{
-								from = "m9.vmat"
+								from = "arms.vmat"
+								to = "weapons/v_knifebayonet/arms.vmat"
+							},
+							{
+								from = "knife.vmat"
 								to = "weapons/bayonetknife.vmat"
 							},
 							{
-								from = "arms.vmat"
-								to = "weapons/v_knifebayonet/arms.vmat"
+								from = "m9.vmat"
+								to = "weapons/bayonetknife.vmat"
 							},
 						]
 						use_global_default = false
@@ -100,9 +37,9 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						filename = "weapons/knifebayonet/Knife.fbx"
-						import_translation = [ 60.0, -21.0, -30.0 ]
-						import_rotation = [ -65.0, 20.0, 0.0 ]
+						filename = "weapons/knifebayonet/armswithoutknife.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
@@ -116,28 +53,162 @@
 					},
 					{
 						_class = "RenderMeshFile"
-						filename = "weapons/knifebayonet/arms@knife.fbx"
-						import_translation = [ 25.0, 0.0, -30.0 ]
-						import_rotation = [ 0.0, 0.0, 0.0 ]
-						import_scale = 1.0
+						filename = "weapons/knifebayonet/Knife.fbx"
+						import_translation = [ -40.0, 2.0, 8.0 ]
+						import_rotation = [ 14.0, 34.0, 0.0 ]
+						import_scale = 1.2
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
-						parent_bone = ""
+						parent_bone = "R_wrist"
 						import_filter = 
 						{
-							exclude_by_default = true
-							exception_list = 
-							[
-								"armmesh",
-							]
+							exclude_by_default = false
+							exception_list = [  ]
 						}
+					},
+				]
+			},
+			{
+				_class = "AnimationList"
+				children = 
+				[
+					{
+						_class = "AnimFile"
+						name = "knifeidle@idle"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "weapons/Animation/knife/knifeidle.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "knifedeploy@deploy"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "weapons/Animation/knife/knifedeploy.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "knifeslash01@fire1"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "weapons/Animation/knife/knifeslash01.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "knifeslash02@fire2"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "weapons/Animation/knife/knifeslash02.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "knifeslash03@fire3"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "weapons/Animation/knife/knifeslash03.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "knifeslash04@fire4"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "weapons/Animation/knife/knifeslash04.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						reverse = false
+					},
+				]
+				default_root_bone_name = ""
+			},
+			{
+				_class = "ModelModifierList"
+				children = 
+				[
+					{
+						_class = "ModelModifier_Translate"
+						translation = [ 50.0, 0.0, -20.0 ]
 					},
 				]
 			},
 		]
 		model_archetype = ""
 		primary_associated_entity = ""
-		anim_graph_name = ""
+		anim_graph_name = "weapons/knifebayonet/v_knifebayonet.vanmgrph"
 	}
 }

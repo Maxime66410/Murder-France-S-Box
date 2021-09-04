@@ -102,11 +102,11 @@ public partial class MurderGame : Game
 	public void StartGame()
 	{
 		Instance.IsGameIsLaunch = true;
-		Instance.RoundDuration = 600;
+		Instance.RoundDuration = 303;
 		Instance.PreparingGame = false;
 		Log.Info( Instance.IsGameIsLaunch );
 		OnStartGame();
-		//Sound.FromScreen( "roundready.round" );
+		Sound.FromScreen( "start.round" );
 	}
 	
 	public void PreparingGames()
@@ -163,7 +163,7 @@ public partial class MurderGame : Game
 				{
 					GameStade();
 
-					if ( Instance.RoundDuration >= 2 )
+					if ( Instance.RoundDuration >= 1 )
 					{
 						Instance.RoundDuration--;
 						CheckStatsGame();
@@ -306,14 +306,12 @@ public partial class MurderGame : Game
 					}
 				}
 				
-				
-
 				if ( alivePlayers == 0 )
 				{
 					Instance.IsGameIsLaunch = false;
 					OnFinishedUpdateValues();
 					WhoWin = "Le tueur a massacrer tout le monde !";
-					SoundZombieWin();
+					Sound.FromScreen( "loose.round" );
 				}
 
 				if ( alivePlayers >= 1 && Instance.RoundDuration == 0 || murderAlive == 0 )
@@ -321,7 +319,7 @@ public partial class MurderGame : Game
 					Instance.IsGameIsLaunch = false;
 					OnFinishedUpdateValues();
 					WhoWin = "Les inviters on survecu a la soiree !";
-					SoundHumanWin();
+					Sound.FromScreen( "win.round" );
 				}
 			}
 		}
@@ -353,15 +351,5 @@ public partial class MurderGame : Game
 					}
 				}
 			}
-		}
-		
-		public void SoundHumanWin()
-		{
-			//Sound.FromScreen( "humanend.round" );
-		}
-
-		public void SoundZombieWin()
-		{
-			//Sound.FromScreen( "zombieend.round" );
 		}
 }

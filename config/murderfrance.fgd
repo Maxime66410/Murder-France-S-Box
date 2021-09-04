@@ -35,7 +35,7 @@
 // 
 // Pistol : BaseDmWeapon 
 // 
-@PointClass editormodel( "weapons/rust_pistol/rust_pistol.vmdl" ) = mf_pistol : ""
+@PointClass editormodel( "weapons/pistol/pistolbarreta.vmdl" ) = mf_pistol : ""
 [
 	targetname(target_source) : "Name" : : "The name that other entities refer to this entity by."
 	parentname(target_destination) [ group="Hierarchy" ] : "Parent" : : "The name of this entity's parent in the movement hierarchy. Entities with parents move with their parent."

@@ -6,6 +6,7 @@
 @import "_pickupfeed.scss";
 @import "_scoreboard.scss";
 @import "_time.scss";
+@import "_winandrole.scss";
 
 rootpanel
 {
@@ -46,30 +47,6 @@ vitals
 		}
 	}
 }
-
-whowinui
-{
-	position: absolute;
-	color: #ff0;
-	mix-blend-mode: lighten;
-	font-family: Roboto;
-
-	Label
-	{
-
-		text-shadow: 0px 0px 20px #f70a;
-
-		&.winwho
-		{
-			top: 500px;
-			left: 730px;
-			color: rgb(156, 255, 64);
-			font-size: 100px;
-		}
-	}
-}
-
-
 
 teams
 {

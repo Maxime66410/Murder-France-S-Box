@@ -1,0 +1,73 @@
+﻿winandrole{
+
+  .IsNotLaunch{
+    opacity: 0;
+  }
+
+  .IsLaunch{
+    background-color: #000c;
+    border: 1px solid #1b1b1b;
+    border-radius: 60px;
+    font-family: Poppins;
+    width: 600px;
+    height: 300px;
+    min-width: 50px;
+    max-width: 600px;
+    min-height: 50px;
+    max-height: 600px;
+    transform: translateX(120%) translateY(120%);
+    //position: absolute;
+    
+
+    color: #fafafa;
+    font-family: Poppins;
+    font-weight: 500;
+    // pointer-events: all;
+    //lex-direction: column;
+
+    font-size: 30px;
+    align-items: center;
+    text-align: center;
+    padding: 10px 10px 10px;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 5px black;
+
+    opacity: 1;
+
+    &.tueurtexts
+    {
+      color: rgb(255, 64, 64);
+    }
+
+    &.invitetexts
+    {
+      color: rgb(64, 201, 255);
+    }
+
+    &.agenttexts
+    {
+      color: rgb(64, 255, 105);
+    }
+    
+    &.Loose
+    {
+      color: #880022;
+    }
+    
+    &.Win
+    {
+      color: #0a61cb;
+    }
+    
+    &.neutral
+    {
+      color: white;
+    }
+
+    &.whoneutral
+    {
+      color: white;
+    }
+    
+  }
+}
