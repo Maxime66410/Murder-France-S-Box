@@ -29,8 +29,6 @@ partial class DeathmatchPlayer : Player
 		var RandomGender = new Random();
 		var ResultGender = RandomGender.Next( 0, 2 );
 		
-		Log.Info(ResultGender);
-
 		if ( ResultGender == 0 )
 		{
 			Gender = true;

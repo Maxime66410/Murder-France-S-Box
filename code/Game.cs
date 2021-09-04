@@ -104,7 +104,6 @@ public partial class MurderGame : Game
 		Instance.IsGameIsLaunch = true;
 		Instance.RoundDuration = 303;
 		Instance.PreparingGame = false;
-		Log.Info( Instance.IsGameIsLaunch );
 		OnStartGame();
 		Sound.FromScreen( "start.round" );
 	}
@@ -130,9 +129,7 @@ public partial class MurderGame : Game
 				{
 					Instance.RoundDuration--;
 				}
-
-				Log.Info( Instance.RoundDuration );
-
+				
 				if ( Instance.RoundDuration <= 0 )
 				{
 					Instance.RoundDuration = 0;
@@ -168,9 +165,7 @@ public partial class MurderGame : Game
 						Instance.RoundDuration--;
 						CheckStatsGame();
 					}
-
-					Log.Info( Instance.RoundDuration );
-
+					
 					if ( Instance.RoundDuration <= 0 )
 					{
 						Instance.RoundDuration = 0;
@@ -341,9 +336,7 @@ public partial class MurderGame : Game
 					{
 						Instance.RoundDuration--;
 					}
-
-					Log.Info( Instance.RoundDuration );
-
+					
 					if ( Instance.RoundDuration <= 0 )
 					{
 						Instance.RoundDuration = 0;
