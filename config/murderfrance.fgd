@@ -1,5 +1,5 @@
 // 
-// MurderGame : Sandbox.Game 
+// MurderGame
 // 
 @PointClass = murderfrance : "This is the heart of the gamemode. It's responsible for creating the player and stuff."
 [
@@ -9,7 +9,7 @@
 ]
 
 // 
-// Hand : BaseDmWeapon 
+// Hand
 // 
 @PointClass editormodel( "weapons/rust_pistol/rust_pistol.vmdl" ) = mf_hand : ""
 [
@@ -21,7 +21,7 @@
 ]
 
 // 
-// Knife : BaseDmWeapon 
+// Knife
 // 
 @PointClass editormodel( "weapons/knifebayonet.vmdl" ) = mf_knife : ""
 [
@@ -33,7 +33,7 @@
 ]
 
 // 
-// Pistol : BaseDmWeapon 
+// Pistol
 // 
 @PointClass editormodel( "weapons/pistol/pistolbarreta.vmdl" ) = mf_pistol : ""
 [
